@@ -55,20 +55,28 @@ Houses command significant premiums in established suburbs, suggesting unit buye
 ## Project Structure
 
 ```
-Melbourne-housing-analysis/
+Melbourne-Housing-Analysis/
 ├── data/
-│   ├── raw/                    # Original dataset
-│   └── processed/              # Cleaned and analysis data
+│   ├── raw/
+│   │   └── melb_data.csv              # Original dataset (13,580 records)
+│   └── processed/
+│       ├── melb_data_cleaned.csv      # Cleaned dataset (11,638 records)
+│       └── melb_data_analysis.csv     # Analysis subset (3,419 top 20 suburbs)
 ├── src/
-│   ├── data_cleaning.py        # Data cleaning pipeline
-│   ├── feature_engineering.py  # Feature creation
-│   └── generate_insights.py    # Analysis and insights
-├── images/                     # Chart exports
+│   ├── data_cleaning.py               # Data cleaning pipeline
+│   ├── feature_engineering.py         # Feature creation
+│   └── generate_insights.py           # Analysis and insights
+├── images/                            # Visualizations
+│   ├── median_price_by_suburb.png
+│   ├── price_vs_rooms.png
+│   ├── property_type_distribution.png
+│   ├── quarterly_trends.png
+│   └── value_suburbs.png
 ├── docs/
-│   ├── Analysis_Summary.docx   # Investment insights report
-│   └── Interview_Prep_Guide.docx
-├── Melbourne_Housing_Analysis.xlsx  # Interactive dashboard
-└── README.md
+│   ├── README.md                      # Project documentation
+│   ├── Analysis_Summary.docx          # Investment insights report
+│   └── requirements.txt               # Python dependencies
+└── README.md                          # This file
 ```
 
 ## Methodology
