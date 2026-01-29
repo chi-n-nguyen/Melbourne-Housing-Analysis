@@ -12,6 +12,18 @@ Data-driven investment analysis tool identifying undervalued suburbs and market 
 - 20% market growth from Q2 2016 to Q3 2017
 - Strongest gains in Q4 2016
 
+## Visualisations
+
+![Quarterly Trends](../images/quarterly_trends.png)
+
+![Median Price by Suburb](../images/median_price_by_suburb.png)
+
+![Value Suburbs](../images/value_suburbs.png)
+
+![Property Type Distribution](../images/property_type_distribution.png)
+
+![Price vs Rooms](../images/price_vs_rooms.png)
+
 ## Deliverables
 
 **Excel Dashboard** (`Melbourne_Housing_Dashboard.xlsx`)
@@ -61,7 +73,7 @@ python src/create_dashboard.py
 ## Data Quality
 
 - **Raw**: 13,580 transactions
-- **Cleaned**: 11,638 records (removed invalid land sizes, standardized suburbs)
+- **Cleaned**: 11,638 records (removed invalid land sizes, standardised suburbs)
 - **Analysis**: 3,419 records (top 20 suburbs by volume)
 - **Completeness**: 95.2%
 - **Period**: Q2 2016 - Q3 2017
