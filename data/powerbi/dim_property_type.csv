@@ -1,0 +1,4 @@
+PropertyType,Type_Code,Description,Is_House
+House,h,Detached house,True
+Unit,u,Apartment or unit,False
+Townhouse,t,Attached townhouse,False

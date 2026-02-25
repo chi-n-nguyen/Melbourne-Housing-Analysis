@@ -1,0 +1,132 @@
+// ============================================================
+// Melbourne Housing Analysis — Power BI DAX Measures
+// ============================================================
+// Paste each measure into Power BI Desktop via:
+//   Modeling tab → New Measure
+// All measures reference the fact_transactions table unless noted.
+// ============================================================
+
+
+// ------------------------------------------------------------
+// TABLE: fact_transactions
+// ------------------------------------------------------------
+
+// Core price measures
+Median Sale Price =
+    MEDIAN(fact_transactions[Price])
+
+Average Sale Price =
+    AVERAGE(fact_transactions[Price])
+
+Total Transactions =
+    COUNTROWS(fact_transactions)
+
+Median Price per SQM =
+    MEDIAN(fact_transactions[Price_per_sqm])
+
+
+// Market growth — Q2 2016 baseline to Q3 2017 peak
+Market Growth % =
+VAR BasePrice =
+    CALCULATE(
+        MEDIAN(fact_transactions[Price]),
+        dim_date[Quarter] = "2016Q2"
+    )
+VAR PeakPrice =
+    CALCULATE(
+        MEDIAN(fact_transactions[Price]),
+        dim_date[Quarter] = "2017Q3"
+    )
+RETURN
+    DIVIDE(PeakPrice - BasePrice, BasePrice)
+
+// Quarter-over-quarter growth (for use in quarterly trend visuals)
+QoQ Price Growth % =
+VAR CurrentQMedian  = MEDIAN(fact_transactions[Price])
+VAR PreviousQMedian =
+    CALCULATE(
+        MEDIAN(fact_transactions[Price]),
+        DATEADD(dim_date[Date], -1, QUARTER)
+    )
+RETURN
+    DIVIDE(CurrentQMedian - PreviousQMedian, PreviousQMedian)
+
+
+// Price vs market median — useful in suburb comparison visuals
+Selected Suburb Median =
+    MEDIAN(fact_transactions[Price])
+
+Market Median (All) =
+    CALCULATE(
+        MEDIAN(fact_transactions[Price]),
+        ALL(fact_transactions)
+    )
+
+Price vs Market % =
+    DIVIDE(
+        [Selected Suburb Median] - [Market Median (All)],
+        [Market Median (All)]
+    )
+
+
+// Undervalued property count (>30% below suburb median)
+Undervalued Properties =
+    COUNTROWS(
+        FILTER(
+            fact_transactions,
+            fact_transactions[Price_Deviation] < -0.30
+        )
+    )
+
+// Value suburb discount — drives the 45-46% resume finding
+Value Suburb Avg Discount % =
+CALCULATE(
+    AVERAGEX(
+        agg_value_gaps,
+        agg_value_gaps[Discount_Pct] / 100
+    )
+)
+
+
+// ------------------------------------------------------------
+// TABLE: agg_quarterly_trends  (pre-aggregated, no relationships)
+// ------------------------------------------------------------
+
+// Use these directly in a line chart with Quarter on the X-axis.
+// They do not need to join to fact_transactions.
+
+Peak Quarter Median =
+    MAXX(agg_quarterly_trends, agg_quarterly_trends[Median_Price])
+
+Base Quarter Median =
+    MINX(agg_quarterly_trends, agg_quarterly_trends[Median_Price])
+
+
+// ------------------------------------------------------------
+// TABLE: dim_suburb
+// ------------------------------------------------------------
+
+Value Suburb Count =
+    COUNTROWS(
+        FILTER(dim_suburb, dim_suburb[Is_Value_Suburb] = TRUE())
+    )
+
+Suburbs Analyzed =
+    COUNTROWS(dim_suburb)
+
+
+// ------------------------------------------------------------
+// KPI CARD MEASURES  (for Executive Summary page)
+// ------------------------------------------------------------
+
+KPI - Median Price (formatted) =
+    FORMAT([Median Sale Price], "$#,##0")
+
+KPI - Market Growth (formatted) =
+    FORMAT([Market Growth %], "+0%")
+
+KPI - Total Transactions (formatted) =
+    FORMAT([Total Transactions], "#,##0")
+
+KPI - Value Discount (formatted) =
+    FORMAT([Value Suburb Avg Discount %], "0%") & " discount"

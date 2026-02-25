@@ -1,0 +1,21 @@
+Suburb,Median_Price,Transaction_Count,Distance_to_CBD,Postcode,Investment_Rating,Region,Is_Value_Suburb
+Balwyn North,1740000,167,9.0,3104,PREMIUM,Inner (0–10 km),False
+Bentleigh,1307000,128,13.0,3204,AT MARKET,Middle (10–20 km),False
+Bentleigh East,1100000,240,14.0,3165,AT MARKET,Middle (10–20 km),False
+Brighton,1961000,152,11.0,3186,PREMIUM,Middle (10–20 km),False
+Brighton East,1600000,133,11.0,3187,PREMIUM,Middle (10–20 km),False
+Brunswick,1037000,187,5.0,3056,BELOW MARKET,Inner (0–10 km),False
+Camberwell,1800000,121,8.0,3124,PREMIUM,Inner (0–10 km),False
+Coburg,944000,170,8.0,3058,BELOW MARKET,Inner (0–10 km),True
+Essendon,1165000,173,8.0,3040,AT MARKET,Inner (0–10 km),False
+Glen Iris,1750500,166,9.0,3146,PREMIUM,Inner (0–10 km),False
+Glenroy,677500,154,13.0,3046,VALUE BUY,Middle (10–20 km),True
+Kew,1950000,139,6.0,3101,PREMIUM,Inner (0–10 km),False
+Moonee Ponds,1240000,123,7.0,3039,AT MARKET,Inner (0–10 km),False
+Newport,984000,130,8.0,3015,BELOW MARKET,Inner (0–10 km),False
+Northcote,1302500,162,6.0,3070,AT MARKET,Inner (0–10 km),False
+Pascoe Vale,770000,164,10.0,3044,BELOW MARKET,Inner (0–10 km),False
+Preston,910000,230,9.0,3072,BELOW MARKET,Inner (0–10 km),False
+Reservoir,705000,337,11.0,3073,VALUE BUY,Middle (10–20 km),True
+Richmond,1200000,196,3.0,3121,AT MARKET,Inner (0–10 km),False
+Yarraville,982500,147,7.0,3013,BELOW MARKET,Inner (0–10 km),False
