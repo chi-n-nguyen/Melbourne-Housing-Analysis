@@ -7,21 +7,21 @@ Run this after feature_engineering.py.
 Output directory: data/powerbi/
 
   Fact table:
-    fact_transactions.csv         — one row per sale
+    fact_transactions.csv         -one row per sale
 
   Dimension tables:
-    dim_suburb.csv                — suburb metadata + investment ratings
-    dim_date.csv                  — full date dimension for time intelligence
-    dim_property_type.csv         — property type lookup
+    dim_suburb.csv                -suburb metadata + investment ratings
+    dim_date.csv                  -full date dimension for time intelligence
+    dim_property_type.csv         -property type lookup
 
   Pre-aggregated summary tables:
-    agg_quarterly_trends.csv      — quarterly medians, volumes, QoQ growth
-    agg_suburb_summary.csv        — suburb-level KPIs vs market median
-    agg_property_type_premium.csv — house-vs-unit premium by suburb
-    agg_value_gaps.csv            — undervalued suburb comparisons
+    agg_quarterly_trends.csv      -quarterly medians, volumes, QoQ growth
+    agg_suburb_summary.csv        -suburb-level KPIs vs market median
+    agg_property_type_premium.csv -house-vs-unit premium by suburb
+    agg_value_gaps.csv            -undervalued suburb comparisons
 
   DAX measures:
-    powerbi_measures.dax          — copy-paste measures for Power BI
+    powerbi_measures.dax          -copy-paste measures for Power BI
 
 Usage:
     python src/create_powerbi_export.py
@@ -210,7 +210,7 @@ def build_agg_quarterly_trends(df: pd.DataFrame) -> pd.DataFrame:
     """
     Quarterly median price, mean price, volume, and QoQ growth.
 
-    Power BI suggestion: Line chart — Quarter on X, Median_Price on Y.
+    Power BI suggestion: Line chart -Quarter on X, Median_Price on Y.
     Add Transaction_Count as a secondary bar to show volume.
     """
     agg = (
@@ -250,7 +250,7 @@ def build_agg_suburb_summary(df: pd.DataFrame) -> pd.DataFrame:
     """
     Suburb-level KPIs sorted by median price descending.
 
-    Power BI suggestion: Bar chart — Suburb on Y, Median_Price on X.
+    Power BI suggestion: Bar chart -Suburb on Y, Median_Price on X.
     Use Investment_Rating as a slicer.
     """
     market_median = df["Price"].median()
@@ -288,7 +288,7 @@ def build_agg_property_type_premium(df: pd.DataFrame) -> pd.DataFrame:
     """
     House-vs-unit median price premium by suburb.
 
-    Power BI suggestion: Clustered bar — House, Unit, Townhouse medians
+    Power BI suggestion: Clustered bar -House, Unit, Townhouse medians
     side by side per suburb. Add House_vs_Unit_Premium_Pct as a tooltip.
     """
     pivot = (
@@ -326,7 +326,7 @@ def build_agg_value_gaps(df: pd.DataFrame) -> pd.DataFrame:
     The three pairs mirror the resume finding: Reservoir/Glenroy/Coburg
     trading at 45–46% discounts to neighbouring premium suburbs.
 
-    Power BI suggestion: Grouped bar — Value_Price vs Premium_Price,
+    Power BI suggestion: Grouped bar -Value_Price vs Premium_Price,
     with Discount_Pct shown as a data label.
     """
     suburb_medians = df.groupby("Suburb")["Price"].median()

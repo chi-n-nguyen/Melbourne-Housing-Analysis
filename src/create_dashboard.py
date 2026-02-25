@@ -244,7 +244,7 @@ def create_suburb_lookup(wb, df):
 
 
 def create_suburb_comparison(wb, df):
-    """Create suburb comparison pivot table."""
+    """Create suburb comparison analysis table (pivot-style aggregation)."""
     ws = wb.create_sheet("Suburb Analysis")
 
     ws['A1'] = "SUBURB COMPARISON ANALYSIS"
@@ -433,16 +433,19 @@ def create_skills_demo(wb, df):
     ws['A4'] = "1. LOOKUP FUNCTIONS"
     ws['A4'].font = Font(bold=True, size=12, color="1F4E79")
 
+    n_suburbs = df['Suburb'].nunique()
+    last_ref_row = 49 + n_suburbs  # header at row 49, data rows 50..49+n_suburbs
+
     ws['A6'] = "VLOOKUP Example:"
     ws['A6'].font = Font(bold=True)
     ws['A7'] = "Find median price for Brighton:"
-    ws['B7'] = '=VLOOKUP("Brighton",$A$50:$C$70,2,FALSE)'
+    ws['B7'] = f'=VLOOKUP("Brighton",$A$50:$C${last_ref_row},2,FALSE)'
     ws['B7'].fill = PatternFill("solid", fgColor="FFFF00")
 
     ws['A9'] = "INDEX/MATCH Example:"
     ws['A9'].font = Font(bold=True)
     ws['A10'] = "More flexible lookup:"
-    ws['B10'] = '=INDEX($B$50:$B$70,MATCH("Reservoir",$A$50:$A$70,0))'
+    ws['B10'] = f'=INDEX($B$50:$B${last_ref_row},MATCH("Reservoir",$A$50:$A${last_ref_row},0))'
     ws['B10'].fill = PatternFill("solid", fgColor="FFFF00")
 
     # Section 2: Conditional Logic
@@ -457,8 +460,8 @@ def create_skills_demo(wb, df):
 
     ws['A18'] = "SUMIFS Example:"
     ws['A18'].font = Font(bold=True)
-    ws['A19'] = "Total sales in South Yarra:"
-    ws['B19'] = '=SUMIFS(Data!E:E,Data!A:A,"South Yarra")'
+    ws['A19'] = "Total sales in Reservoir:"
+    ws['B19'] = '=SUMIFS(Data!E:E,Data!A:A,"Reservoir")'
     ws['B19'].fill = PatternFill("solid", fgColor="FFFF00")
 
     ws['A21'] = "COUNTIFS Example:"

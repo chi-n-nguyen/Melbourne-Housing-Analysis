@@ -1,5 +1,5 @@
 // ============================================================
-// Melbourne Housing Analysis — Power BI DAX Measures
+// Melbourne Housing Analysis -Power BI DAX Measures
 // ============================================================
 // Paste each measure into Power BI Desktop via:
 //   Modeling tab → New Measure
@@ -25,7 +25,7 @@ Median Price per SQM =
     MEDIAN(fact_transactions[Price_per_sqm])
 
 
-// Market growth — Q2 2016 baseline to Q3 2017 peak
+// Market growth -Q2 2016 baseline to Q3 2017 peak
 Market Growth % =
 VAR BasePrice =
     CALCULATE(
@@ -52,7 +52,7 @@ RETURN
     DIVIDE(CurrentQMedian - PreviousQMedian, PreviousQMedian)
 
 
-// Price vs market median — useful in suburb comparison visuals
+// Price vs market median -useful in suburb comparison visuals
 Selected Suburb Median =
     MEDIAN(fact_transactions[Price])
 
@@ -78,7 +78,7 @@ Undervalued Properties =
         )
     )
 
-// Value suburb discount — drives the 45-46% resume finding
+// Value suburb discount -drives the 45-46% resume finding
 Value Suburb Avg Discount % =
 CALCULATE(
     AVERAGEX(
